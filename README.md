@@ -21,8 +21,8 @@ use Datanyze\Reporter\Sanitizer\SanitizerStrings;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$strOne = 'Hi, I live in the country Russia, city Saint Petersburg';
-$strTwo = 'Hi, I'm from Saint-Petersburg, live in Russia';
+$strOne = "Hi, I live in the country Russia, city Saint Petersburg";
+$strTwo = "Hi, I'm from Saint-Petersburg, live in Russia";
 
 try{
   $sanitizer = new SanitizerStrings();
