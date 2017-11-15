@@ -11,7 +11,7 @@ interface AlgorithmInterface
     /**
      * @param string $strOne
      * @param string $strTwo
-     * @return Generator
+     * @return \Generator
      */
     public function calculate(string $strOne, string $strTwo): \Generator;
 }

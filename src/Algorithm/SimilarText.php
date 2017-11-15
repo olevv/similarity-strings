@@ -18,6 +18,8 @@ final class SimilarText extends ExtractClass implements AlgorithmInterface
     {
         $algorithmName = $this->getAlgorithmName((string)get_class());
 
-        yield $algorithmName => (float)round(similar_text($strOne, $strTwo, $percent), 2);
+        similar_text($strOne, $strTwo, $percent);
+
+        yield $algorithmName => (float)round($percent, 2);
     }
 }

@@ -8,5 +8,9 @@ namespace Olevv\SimilarityStrings\Sanitizer;
  */
 interface SanitizerInterface
 {
+    /**
+     * @param string $str
+     * @return string
+     */
     public function sanitize(string $str): string;
 }
