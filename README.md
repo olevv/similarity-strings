@@ -32,7 +32,7 @@ try{
   $similarity = (new FactoryAlgorithm())->build(FactoryAlgorithm::ALL);
 
   foreach ($similarity->calculate($strOne, $strTwo) as $name => $value){
-      echo name . ": " . $value . "%" . "\n";
+      echo $name . ": " . $value . "%" . "\n";
   }
 }catch(InvalidArgumentException $e){
   echo $e->getMessage();
