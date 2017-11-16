@@ -25,7 +25,7 @@ $strOne = "Hi, I live in the country Russia, city Saint Petersburg";
 $strTwo = "Hi, I'm from Saint-Petersburg, live in Russia";
 
 try{
-  $sanitizer = new SanitizerStrings();
+  $sanitizer = new Sanitizer();
   $strOne = $sanitizer->sanitize($strOne);
   $strTwo = $sanitizer->sanitize($strTwo);
 
