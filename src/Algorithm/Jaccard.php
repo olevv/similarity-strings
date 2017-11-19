@@ -6,25 +6,23 @@ namespace Olevv\SimilarityStrings\Algorithm;
  * Class Jaccard
  * @package Olevv\SimilarityStrings\Algorithm
  */
-final class Jaccard extends ExtractClass implements AlgorithmInterface
+final class Jaccard implements AlgorithmInterface
 {
 
     /**
      * @param string $strOne
      * @param string $strTwo
-     * @return \Generator
+     * @return float
      */
-    public function calculate(string $strOne, string $strTwo): \Generator
+    public function calculate(string $strOne, string $strTwo): float
     {
-        $str1 = explode(' ', $strOne);
-        $str2 = explode(' ', $strTwo);
+        $strOne = explode(' ', $strOne);
+        $strTwo = explode(' ', $strTwo);
 
-        $intersection = array_intersect($str1, $str2);
+        $intersection = array_intersect($strOne, $strTwo);
 
-        $union = array_merge($str1, $str2);
+        $union = array_merge($strOne, $strTwo);
 
-        $algorithmName = $this->getAlgorithmName((string)get_class());
-
-        yield $algorithmName => (float)round((count($intersection) / count($union)) * 100, 2);
+        return (float)round((count($intersection) / count($union)) * 100, 2);
     }
 }

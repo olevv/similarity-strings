@@ -6,31 +6,31 @@ namespace Olevv\SimilarityStrings\Algorithm;
  * Class ThreeSets
  * @package Olevv\SimilarityStrings\Algorithm
  */
-final class ThreeSets extends ExtractClass implements AlgorithmInterface
+final class ThreeSets implements AlgorithmInterface
 {
     private const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
     /**
      * @param string $strOne
      * @param string $strTwo
-     * @return \Generator
+     * @return float
      */
-    public function calculate(string $strOne, string $strTwo): \Generator
+    public function calculate(string $strOne, string $strTwo): float
     {
         $hashCharOne = [];
         $strOne = preg_replace('/[^a-z]/', '', $strOne);
         $charOne = count_chars($strOne, 1);
         foreach ($charOne as $key => $value) {
-            $ch = chr($key);
-            $hashCharOne[$ch] = $value;
+            $chr = chr($key);
+            $hashCharOne[$chr] = $value;
         }
 
         $hashCharTwo = [];
         $strTwo = preg_replace('/[^a-z]/', '', $strTwo);
         $charTwo = count_chars($strTwo, 1);
         foreach ($charTwo as $key => $value) {
-            $ch = chr($key);
-            $hashCharTwo[$ch] = $value;
+            $chr = chr($key);
+            $hashCharTwo[$chr] = $value;
         };
 
         $chars = preg_split('//', static::ALPHABET);
@@ -46,15 +46,15 @@ final class ThreeSets extends ExtractClass implements AlgorithmInterface
             $valueOne = empty($value) ? 0 : $value;
 
             $value = array_key_exists($char, $hashCharTwo) ? $hashCharTwo[$char] : '';
-            $valTwo = empty($value) ? 0 : $value;
+            $valueTwo = empty($value) ? 0 : $value;
 
-            $similarity += abs($valueOne - $valTwo);
+            $similarity += abs($valueOne - $valueTwo);
         }
 
         $lengthTotal = strlen($strOne) + strlen($strTwo);
 
-        $algorithmName = $this->getAlgorithmName((string)get_class());
+        $percentSimilarity = (1 - $similarity / $lengthTotal) * 100;
 
-        yield $algorithmName => (float)round((1 - $similarity / $lengthTotal) * 100, 2);
+        return (float)round($percentSimilarity, 2);
     }
 }

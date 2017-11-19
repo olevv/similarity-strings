@@ -6,20 +6,17 @@ namespace Olevv\SimilarityStrings\Algorithm;
  * Class SimilarText
  * @package Olevv\SimilarityStrings\Algorithm
  */
-final class SimilarText extends ExtractClass implements AlgorithmInterface
+final class SimilarText implements AlgorithmInterface
 {
-
     /**
      * @param string $strOne
      * @param string $strTwo
-     * @return \Generator
+     * @return float
      */
-    public function calculate(string $strOne, string $strTwo): \Generator
+    public function calculate(string $strOne, string $strTwo): float
     {
-        $algorithmName = $this->getAlgorithmName((string)get_class());
-
         similar_text($strOne, $strTwo, $percent);
 
-        yield $algorithmName => (float)round($percent, 2);
+        return (float)round($percent, 2);
     }
 }

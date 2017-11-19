@@ -13,27 +13,16 @@ composer require olevv/similarity-strings
 ### Usage
 
 ```php
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
-use Datanyze\Reporter\Algorithm\FactoryAlgorithm;
-use Datanyze\Reporter\Exceptions\InvalidArgumentException;
-use Datanyze\Reporter\Sanitizer\SanitizerStrings;
+use Olevv\SimilarityStrings\Algorithm\Levenstein;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 $strOne = "Hi, I live in the country Russia, city Saint Petersburg";
 $strTwo = "Hi, I'm from Saint-Petersburg, live in Russia";
 
-try{
-  $sanitizer = new Sanitizer();
-  $strOne = $sanitizer->sanitize($strOne);
-  $strTwo = $sanitizer->sanitize($strTwo);
+$levenstein = new Levenstein;
 
-  $similarity = (new FactoryAlgorithm())->build(FactoryAlgorithm::ALL);
-
-  foreach ($similarity->calculate($strOne, $strTwo) as $name => $value){
-      echo $name . ": " . $value . "%" . "\n";
-  }
-}catch(InvalidArgumentException $e){
-  echo $e->getMessage();
-}
+$similarity = $levenstein->calculate($strOne, $strTwo);
+echo "Levenstein: " . $similarity . "%" . "\n";

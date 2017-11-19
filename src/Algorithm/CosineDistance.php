@@ -6,21 +6,27 @@ namespace Olevv\SimilarityStrings\Algorithm;
  * Class CosineDistance
  * @package Olevv\SimilarityStrings\Algorithm
  */
-final class CosineDistance extends ExtractClass implements AlgorithmInterface
+final class CosineDistance implements AlgorithmInterface
 {
     /**
      * @param string $strOne
      * @param string $strTwo
-     * @return \Generator
+     * @return float
      */
-    public function calculate(string $strOne, string $strTwo): \Generator
+    public function calculate(string $strOne, string $strTwo): float
     {
         $tokensA = explode(' ', $strOne);
         $tokensB = explode(' ', $strTwo);
-        $a = $b = $c = 0;
+        $dotProduct = $tokenA = $tokenB = 0;
         $uniqueTokensA = $uniqueTokensB = [];
 
-        $uniqueMergedTokens = array_diff(array_unique(array_merge($tokensA, $tokensB)), ['']);
+        $uniqueMergedTokens =
+            array_diff(
+                array_unique(
+                    array_merge($tokensA, $tokensB)
+                ),
+                ['']
+            );
 
         foreach ($tokensA as $token) {
             $uniqueTokensA[$token] = 0;
@@ -32,13 +38,13 @@ final class CosineDistance extends ExtractClass implements AlgorithmInterface
         foreach ($uniqueMergedTokens as $token) {
             $x = isset($uniqueTokensA[$token]) ? 1 : 0;
             $y = isset($uniqueTokensB[$token]) ? 1 : 0;
-            $a += $x * $y;
-            $b += $x;
-            $c += $y;
+            $dotProduct += $x * $y;
+            $tokenA += $x;
+            $tokenB += $y;
         }
 
-        $algorithmName = $this->getAlgorithmName((string)get_class());
+        $similarity = ($tokenA * $tokenB != 0 ? $dotProduct / sqrt($tokenA * $tokenB) : 0) * 100;
 
-        yield $algorithmName => (float)round(($b * $c != 0 ? $a / sqrt($b * $c) : 0) * 100, 2);
+        return (float)round($similarity, 2);
     }
 }
