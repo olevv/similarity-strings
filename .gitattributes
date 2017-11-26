@@ -6,3 +6,5 @@
 /.travis.yml export-ignore
 /.idea export-ignore
 /README.md export-ignore
+/tests export-ignore
+/phpunit.xml export-ignore

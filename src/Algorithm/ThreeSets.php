@@ -21,7 +21,7 @@ final class ThreeSets implements AlgorithmInterface
         $strOne = preg_replace('/[^a-z]/', '', $strOne);
         $charOne = count_chars($strOne, 1);
         foreach ($charOne as $key => $value) {
-            $chr = chr($key);
+            $chr = \chr($key);
             $hashCharOne[$chr] = $value;
         }
 
@@ -29,7 +29,7 @@ final class ThreeSets implements AlgorithmInterface
         $strTwo = preg_replace('/[^a-z]/', '', $strTwo);
         $charTwo = count_chars($strTwo, 1);
         foreach ($charTwo as $key => $value) {
-            $chr = chr($key);
+            $chr = \chr($key);
             $hashCharTwo[$chr] = $value;
         };
 
@@ -51,7 +51,7 @@ final class ThreeSets implements AlgorithmInterface
             $similarity += abs($valueOne - $valueTwo);
         }
 
-        $lengthTotal = strlen($strOne) + strlen($strTwo);
+        $lengthTotal = \strlen($strOne) + \strlen($strTwo);
 
         $percentSimilarity = (1 - $similarity / $lengthTotal) * 100;
 

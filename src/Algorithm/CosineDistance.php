@@ -43,7 +43,7 @@ final class CosineDistance implements AlgorithmInterface
             $tokenB += $y;
         }
 
-        $similarity = ($tokenA * $tokenB != 0 ? $dotProduct / sqrt($tokenA * $tokenB) : 0) * 100;
+        $similarity = ($tokenA * $tokenB !== 0 ? $dotProduct / sqrt($tokenA * $tokenB) : 0) * 100;
 
         return (float)round($similarity, 2);
     }
