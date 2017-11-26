@@ -1,12 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace unit\Algorithm;
+namespace Olevv\SimilarityStrings\Algorithm;
 
-use Framework\TestCase;
-use Olevv\SimilarityStrings\Algorithm\CosineDistance;
+use PHPUnit\Framework\TestCase;
 
+/**
+ * Class CosineDistanceTest
+ * @package Olevv\SimilarityStrings\Algorithm
+ */
 final class CosineDistanceTest extends TestCase
 {
+    /**
+     * @test
+     */
     public function it_returns_the_calculated_similarity() :void
     {
         $strOne = 'I love you';
