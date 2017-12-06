@@ -1,6 +1,8 @@
 # Similarity Strings
 Library to compare strings similarity written in PHP
 
+[![Build Status](https://travis-ci.org/olevv/similarity-strings.svg?branch=master)](https://travis-ci.org/olevv/similarity-strings)
+
 ### Setup
 
 Should be installed php 7
