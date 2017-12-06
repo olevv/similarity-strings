@@ -21,10 +21,10 @@ use Olevv\SimilarityStrings\Algorithm\Levenstein;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$strOne = "Hi, I live in the country Russia, city Saint Petersburg";
+$strOne = 'Hi, I live in Saint Petersburg, Russia';
 $strTwo = "Hi, I'm from Saint-Petersburg, live in Russia";
 
 $levenstein = new Levenstein;
 
 $similarity = $levenstein->calculate($strOne, $strTwo);
-echo "Levenstein: " . $similarity . "%" . "\n";
+echo 'Levenstein: ' . $similarity . "%\n";
