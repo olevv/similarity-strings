@@ -8,7 +8,7 @@ namespace Olevv\SimilarityStrings\Algorithm;
  */
 final class ThreeSets implements AlgorithmInterface
 {
-    private const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
     /**
      * @param string $strOne
@@ -18,7 +18,7 @@ final class ThreeSets implements AlgorithmInterface
     public function calculate(string $strOne, string $strTwo): float
     {
         $hashCharOne = [];
-        $strOne = preg_replace('/[^a-z]/', '', $strOne);
+        $strOne = (string)preg_replace('/[^a-z]/', '', $strOne);
         $charOne = count_chars($strOne, 1);
         foreach ($charOne as $key => $value) {
             $chr = \chr($key);
@@ -26,7 +26,7 @@ final class ThreeSets implements AlgorithmInterface
         }
 
         $hashCharTwo = [];
-        $strTwo = preg_replace('/[^a-z]/', '', $strTwo);
+        $strTwo = (string)preg_replace('/[^a-z]/', '', $strTwo);
         $charTwo = count_chars($strTwo, 1);
         foreach ($charTwo as $key => $value) {
             $chr = \chr($key);
