@@ -13,7 +13,7 @@ final class CosineDistanceTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_the_calculated_similarity() :void
+    public function it_returns_the_calculated_similarity()
     {
         $strOne = 'I love you';
         $strTwo = 'Also i love you';
