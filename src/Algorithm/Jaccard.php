@@ -10,18 +10,18 @@ final class Jaccard implements AlgorithmInterface
 {
 
     /**
-     * @param string $strOne
-     * @param string $strTwo
+     * @param string $one
+     * @param string $two
      * @return float
      */
-    public function calculate(string $strOne, string $strTwo): float
+    public function calculate(string $one, string $two): float
     {
-        $strOne = explode(' ', $strOne);
-        $strTwo = explode(' ', $strTwo);
+        $one = explode(' ', $one);
+        $two = explode(' ', $two);
 
-        $intersection = array_intersect($strOne, $strTwo);
+        $intersection = array_intersect($one, $two);
 
-        $union = array_merge($strOne, $strTwo);
+        $union = array_merge($one, $two);
 
         return (float)round((count($intersection) / count($union)) * 100, 2);
     }

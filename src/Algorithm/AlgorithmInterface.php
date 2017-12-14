@@ -9,9 +9,9 @@ namespace Olevv\SimilarityStrings\Algorithm;
 interface AlgorithmInterface
 {
     /**
-     * @param string $strOne
-     * @param string $strTwo
+     * @param string $one
+     * @param string $two
      * @return float
      */
-    public function calculate(string $strOne, string $strTwo): float;
+    public function calculate(string $one, string $two): float;
 }

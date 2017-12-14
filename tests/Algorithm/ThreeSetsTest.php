@@ -12,15 +12,24 @@ final class ThreeSetsTest extends TestCase
 {
     /**
      * @test
+     * @dataProvider examples
+     * @param string $one
+     * @param string $two
+     * @param float $expected
      */
-    public function it_returns_the_calculated_similarity()
+    public function it_returns_the_calculated_similarity(string $one, string $two, float $expected)
     {
-        $strOne = 'I love you';
-        $strTwo = 'Also i love you';
-
         $threeSets = new ThreeSets;
 
-        $result = $threeSets->calculate($strOne, $strTwo);
-        $this->assertEquals(77.78, $result);
+        $result = $threeSets->calculate($one, $two);
+        $this->assertEquals($expected, $result);
+    }
+
+    public function examples()
+    {
+        return [
+            ['test', 'test one', 72.73],
+            ['test', 'Test', 85.71],
+        ];
     }
 }

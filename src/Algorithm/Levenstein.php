@@ -10,15 +10,15 @@ final class Levenstein implements AlgorithmInterface
 {
 
     /**
-     * @param string $strOne
-     * @param string $strTwo
+     * @param string $one
+     * @param string $two
      * @return float
      */
-    public function calculate(string $strOne, string $strTwo): float
+    public function calculate(string $one, string $two): float
     {
-        $length = max(mb_strlen($strOne), mb_strlen($strTwo));
+        $length = max(mb_strlen($one), mb_strlen($two));
 
-        $value = levenshtein($strOne, $strTwo);
+        $value = levenshtein($one, $two);
 
         return (float)round((0 === $length ? 0 : 1 - $value / $length) * 100, 2);
     }

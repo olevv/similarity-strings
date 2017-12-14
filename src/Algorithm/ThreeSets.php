@@ -11,23 +11,23 @@ final class ThreeSets implements AlgorithmInterface
     const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
     /**
-     * @param string $strOne
-     * @param string $strTwo
+     * @param string $one
+     * @param string $two
      * @return float
      */
-    public function calculate(string $strOne, string $strTwo): float
+    public function calculate(string $one, string $two): float
     {
         $hashCharOne = [];
-        $strOne = (string)preg_replace('/[^a-z]/', '', $strOne);
-        $charOne = count_chars($strOne, 1);
+        $one = (string)preg_replace('/[^a-z]/', '', $one);
+        $charOne = count_chars($one, 1);
         foreach ($charOne as $key => $value) {
             $chr = \chr($key);
             $hashCharOne[$chr] = $value;
         }
 
         $hashCharTwo = [];
-        $strTwo = (string)preg_replace('/[^a-z]/', '', $strTwo);
-        $charTwo = count_chars($strTwo, 1);
+        $two = (string)preg_replace('/[^a-z]/', '', $two);
+        $charTwo = count_chars($two, 1);
         foreach ($charTwo as $key => $value) {
             $chr = \chr($key);
             $hashCharTwo[$chr] = $value;
@@ -51,7 +51,7 @@ final class ThreeSets implements AlgorithmInterface
             $similarity += abs($valueOne - $valueTwo);
         }
 
-        $lengthTotal = \strlen($strOne) + \strlen($strTwo);
+        $lengthTotal = \strlen($one) + \strlen($two);
 
         $percentSimilarity = (1 - $similarity / $lengthTotal) * 100;
 

@@ -4,10 +4,10 @@ use Olevv\SimilarityStrings\Algorithm\CosineDistance;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$strOne = 'I love you';
-$strTwo = 'Also i love you';
+$one = 'I love you';
+$two = 'Also i love you';
 
 $cosineDistance = new CosineDistance;
 
-$similarity = $cosineDistance->calculate($strOne, $strTwo);
+$similarity = $cosineDistance->calculate($one, $two);
 echo 'Cosine distance: ' . $similarity . '%';
