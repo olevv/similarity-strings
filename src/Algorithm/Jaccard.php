@@ -23,6 +23,6 @@ final class Jaccard implements AlgorithmInterface
 
         $union = array_merge($one, $two);
 
-        return (float)round((count($intersection) / count($union)) * 100, 2);
+        return (float)count($intersection) / count($union);
     }
 }

@@ -53,8 +53,8 @@ final class ThreeSets implements AlgorithmInterface
 
         $lengthTotal = \strlen($one) + \strlen($two);
 
-        $percentSimilarity = (1 - $similarity / $lengthTotal) * 100;
+        $percentSimilarity = 1 - $similarity / $lengthTotal;
 
-        return (float)round($percentSimilarity, 2);
+        return (float)$percentSimilarity;
     }
 }

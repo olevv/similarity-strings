@@ -20,6 +20,6 @@ final class Levenstein implements AlgorithmInterface
 
         $value = levenshtein($one, $two);
 
-        return (float)round((0 === $length ? 0 : 1 - $value / $length) * 100, 2);
+        return (float)0 === $length ? 0 : 1 - $value / $length;
     }
 }

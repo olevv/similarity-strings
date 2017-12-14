@@ -17,6 +17,6 @@ final class SimilarText implements AlgorithmInterface
     {
         similar_text($one, $two, $percent);
 
-        return (float)round($percent, 2);
+        return (float)$percent/100;
     }
 }

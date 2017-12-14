@@ -4,11 +4,7 @@ namespace Olevv\SimilarityStrings\Algorithm;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ThreeSets
- * @package Olevv\SimilarityStrings\Algorithm
- */
-final class ThreeSetsTest extends TestCase
+final class JaroWinklerTest extends TestCase
 {
     /**
      * @test
@@ -19,17 +15,17 @@ final class ThreeSetsTest extends TestCase
      */
     public function it_returns_the_calculated_similarity(string $one, string $two, float $expected)
     {
-        $threeSets = new ThreeSets;
+        $jaroWinkler = new JaroWinkler;
 
-        $result = $threeSets->calculate($one, $two);
+        $result = $jaroWinkler->calculate($one, $two);
         $this->assertEquals($expected, $result);
     }
 
     public function examples()
     {
         return [
-            ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 1],
-            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.83],
+            ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 0.83],
+            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.95],
         ];
     }
 }
