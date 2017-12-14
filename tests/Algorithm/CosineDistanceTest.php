@@ -21,6 +21,6 @@ final class CosineDistanceTest extends TestCase
         $cosineDistance = new CosineDistance;
 
         $result = $cosineDistance->calculate($strOne, $strTwo);
-        $this->assertEquals(0.57, $result);
+        $this->assertEquals(0.57735026918962584, $result);
     }
 }

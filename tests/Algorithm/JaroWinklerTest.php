@@ -24,8 +24,8 @@ final class JaroWinklerTest extends TestCase
     public function examples()
     {
         return [
-            ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 0.83],
-            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.95],
+            ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 0.84571428571428575],
+            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.95384615384615379],
         ];
     }
 }

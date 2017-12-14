@@ -21,6 +21,6 @@ final class JaccardTest extends TestCase
         $jaccard = new Jaccard;
 
         $result = $jaccard->calculate($strOne, $strTwo);
-        $this->assertEquals(0.28, $result);
+        $this->assertEquals(0.2857142857142857, $result);
     }
 }

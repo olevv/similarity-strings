@@ -29,7 +29,7 @@ final class ThreeSetsTest extends TestCase
     {
         return [
             ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 1],
-            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.83],
+            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.83636363636363642],
         ];
     }
 }
