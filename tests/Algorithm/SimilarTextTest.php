@@ -21,6 +21,6 @@ final class SimilarTextTest extends TestCase
         $similarText = new SimilarText;
 
         $result = $similarText->calculate($strOne, $strTwo);
-        $this->assertEquals(72, $result);
+        $this->assertEquals(0.72, $result);
     }
 }

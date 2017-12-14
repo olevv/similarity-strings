@@ -21,6 +21,6 @@ final class LevensteinTest extends TestCase
         $levenstein = new Levenstein;
 
         $result = $levenstein->calculate($strOne, $strTwo);
-        $this->assertEquals(60, $result);
+        $this->assertEquals(0.6, $result);
     }
 }
