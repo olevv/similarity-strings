@@ -12,15 +12,24 @@ final class CosineDistanceTest extends TestCase
 {
     /**
      * @test
+     * @dataProvider examples
+     * @param string $one
+     * @param string $two
+     * @param float $expected
      */
-    public function it_returns_the_calculated_similarity()
+    public function it_returns_the_calculated_similarity(string $one, string $two, float $expected)
     {
-        $strOne = 'I love you';
-        $strTwo = 'Also i love you';
-
         $cosineDistance = new CosineDistance;
 
-        $result = $cosineDistance->calculate($strOne, $strTwo);
-        $this->assertEquals(0.57735026918962584, $result);
+        $result = $cosineDistance->calculate($one, $two);
+        $this->assertEquals($expected, $result);
+    }
+
+    public function examples()
+    {
+        return [
+            ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 1],
+            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.75],
+        ];
     }
 }

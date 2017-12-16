@@ -6,8 +6,46 @@ namespace Olevv\SimilarityStrings\Algorithm;
  * Class JaroWinkler
  * @package Olevv\SimilarityStrings\Algorithm
  */
+/**
+ * Class JaroWinkler
+ * @package Olevv\SimilarityStrings\Algorithm
+ */
 final class JaroWinkler implements AlgorithmInterface
 {
+    const SCALING_FACTOR = 0.1;
+
+    /**
+     * @var
+     */
+    private $matching;
+    /**
+     * @var
+     */
+    private $transpositions;
+    /**
+     * @var
+     */
+    private $firstLength;
+    /**
+     * @var
+     */
+    private $secondLength;
+    /**
+     * @var
+     */
+    private $firstFlags;
+    /**
+     * @var
+     */
+    private $secondFlags;
+    /**
+     * @var
+     */
+    private $range;
+    /**
+     * @var
+     */
+    private $length;
 
     /**
      * @param string $one
@@ -16,69 +54,96 @@ final class JaroWinkler implements AlgorithmInterface
      */
     public function calculate(string $one, string $two): float
     {
-        $scalingFactor = 0.1;
+        $this->matching = 0;
+        $this->transpositions = 0;
+        $this->firstLength = \mb_strlen($one);
+        $this->secondLength = \mb_strlen($two);
 
-        $matching = 0;
-        $transpositions = 0;
-        $firstLength = \mb_strlen($one);
-        $secondLength = \mb_strlen($two);
+        $this->firstFlags = array_fill(0, $this->firstLength, false);
+        $this->secondFlags = array_fill(0, $this->secondLength, false);
+        $this->range = max(0, max($this->firstLength, $this->secondLength) / 2 - 1);
 
-        $sflags = array_fill(0, $firstLength, false);
-        $aflags = array_fill(0, $secondLength, false);
-        $range = max(0, max($firstLength, $secondLength) / 2 - 1);
-
-        if (!$firstLength || !$secondLength) {
+        if (!$this->firstLength || !$this->secondLength) {
             return 0.0;
         }
 
-        foreach (range(0, $secondLength - 1) as $i) {
-            for ($j = max($i - $range, 0), $length = min($i + $range + 1, $firstLength); $j < $length; $j++) {
+        $this->calculateMatching($one, $two);
+
+        if (!$this->matching) {
+            return 0.0;
+        }
+
+        $this->length = 0;
+        $this->calculateTranspositions($one, $two);
+
+        return $this->calculateJaroDistance($one, $two);
+    }
+
+    /**
+     * @param string $one
+     * @param string $two
+     */
+    private function calculateMatching(string $one, string $two)
+    {
+        foreach (range(0, $this->secondLength - 1) as $i) {
+            for ($j = max($i - $this->range, 0),
+                 $length = min($i + $this->range + 1, $this->firstLength); $j < $length; $j++) {
                 $i = (int)$i;
                 $j = (int)$j;
-                if (!$sflags[$j] && $two[$i] === $one[$j]) {
-                    $sflags[$j] = true;
-                    $aflags[$i] = true;
-                    $matching++;
+                if (!$this->firstFlags[$j] && $two[$i] === $one[$j]) {
+                    $this->firstFlags[$j] = true;
+                    $this->secondFlags[$i] = true;
+                    $this->matching++;
                     break;
                 }
             }
         }
+    }
 
-        if (!$matching) {
-            return 0.0;
-        }
-
-        $length = 0;
-        foreach (range(0, $secondLength - 1) as $i) {
-            if (!$aflags[$i]) {
+    /**
+     * @param string $one
+     * @param string $two
+     */
+    private function calculateTranspositions(string $one, string $two)
+    {
+        foreach (range(0, $this->secondLength - 1) as $i) {
+            if (!$this->firstFlags[$i]) {
                 continue;
             }
-            for ($j = $length; $j < $firstLength; $j++) {
-                if ($sflags[$j]) {
-                    $length = $j + 1;
+            for ($j = $this->length; $j < $this->firstLength; $j++) {
+                if ($this->secondFlags[$j]) {
+                    $this->length = $j + 1;
                     break;
                 }
             }
             if ($one[$i] !== $two[$i]) {
-                $transpositions++;
+                $this->transpositions++;
             }
         }
-        $transpositions /= 2;
+        $this->transpositions /= 2;
+    }
 
+    /**
+     * @param string $one
+     * @param string $two
+     * @return float
+     */
+    private function calculateJaroDistance(string $one, string $two): float
+    {
         $jaroDistance =
-            (((float)$matching / $firstLength) +
-                ((float)$matching / $secondLength) +
-                ((float)($matching - $transpositions) / $matching)) / 3.0;
+            (((float)$this->matching / $this->firstLength) +
+                ((float)$this->matching / $this->secondLength) +
+                ((float)($this->matching - $this->transpositions) / $this->matching)) / 3.0;
 
         $length = 0;
-        $min = min(min($firstLength, $secondLength), 4);
+        $min = min(min($this->firstLength, $this->secondLength), 4);
         foreach (range(0, $min - 1) as $i) {
             if ($one[$i] === $two[$i]) {
                 $length++;
             }
         }
 
-        $jaroDistance += ($length * $scalingFactor * (1 - $jaroDistance));
+        $jaroDistance += ($length * static::SCALING_FACTOR * (1 - $jaroDistance));
 
         return (float)$jaroDistance;
     }
