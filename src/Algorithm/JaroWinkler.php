@@ -107,7 +107,7 @@ final class JaroWinkler implements AlgorithmInterface
     private function calculateTranspositions(string $one, string $two)
     {
         foreach (range(0, $this->secondLength - 1) as $i) {
-            if (!$this->firstFlags[$i]) {
+            if (!$this->secondLength[$i]) {
                 continue;
             }
             for ($j = $this->length; $j < $this->firstLength; $j++) {
