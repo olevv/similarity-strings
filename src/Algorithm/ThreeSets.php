@@ -8,7 +8,7 @@ namespace Olevv\SimilarityStrings\Algorithm;
  */
 final class ThreeSets implements AlgorithmInterface
 {
-    private const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
     /**
      * @param string $one

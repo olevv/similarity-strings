@@ -8,7 +8,7 @@ namespace Olevv\SimilarityStrings\Algorithm;
  */
 final class JaroWinkler implements AlgorithmInterface
 {
-    private const SCALING_FACTOR = 0.1;
+    const SCALING_FACTOR = 0.1;
 
     /**
      * @var
