@@ -8,7 +8,7 @@ namespace Olevv\SimilarityStrings\Algorithm;
  */
 final class ThreeSets implements AlgorithmInterface
 {
-    const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    private const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
     /**
      * @param string $one
@@ -17,23 +17,17 @@ final class ThreeSets implements AlgorithmInterface
      */
     public function calculate(string $one, string $two): float
     {
-        $hashCharOne = [];
-        $one = (string)preg_replace('/[^a-z]/', '', $one);
-        $charOne = count_chars($one, 1);
-        foreach ($charOne as $key => $value) {
-            $chr = \chr($key);
-            $hashCharOne[$chr] = $value;
+        $lengthTotal = mb_strlen($one) + mb_strlen($two);
+
+        if (0 === $lengthTotal) {
+            return (float)0;
         }
 
-        $hashCharTwo = [];
-        $two = (string)preg_replace('/[^a-z]/', '', $two);
-        $charTwo = count_chars($two, 1);
-        foreach ($charTwo as $key => $value) {
-            $chr = \chr($key);
-            $hashCharTwo[$chr] = $value;
-        };
+        $hashCharOne = $this->getHashChar($one);
 
-        $chars = preg_split('//', static::ALPHABET);
+        $hashCharTwo = $this->getHashChar($two);
+
+        $chars = preg_split('//', self::ALPHABET);
 
         $similarity = 0;
 
@@ -51,10 +45,27 @@ final class ThreeSets implements AlgorithmInterface
             $similarity += abs($valueOne - $valueTwo);
         }
 
-        $lengthTotal = \strlen($one) + \strlen($two);
-
         $percentSimilarity = 1 - $similarity / $lengthTotal;
 
         return (float)$percentSimilarity;
+    }
+
+    /**
+     * @param string $str
+     * @return array
+     */
+    private function getHashChar(string $str): array
+    {
+        $hashChar = [];
+
+        $two = preg_replace('/[^a-z]/', '', $str);
+        $charTwo = count_chars($two, 1);
+
+        foreach ($charTwo as $key => $value) {
+            $chr = chr($key);
+            $hashChar[$chr] = $value;
+        }
+
+        return $hashChar;
     }
 }

@@ -28,8 +28,9 @@ final class ThreeSetsTest extends TestCase
     public function examples()
     {
         return [
+            ['', '', 0],
             ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 1],
-            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.83636363636363642],
+            ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.8695652173913],
         ];
     }
 }

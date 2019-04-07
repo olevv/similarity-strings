@@ -8,7 +8,6 @@ namespace Olevv\SimilarityStrings\Algorithm;
  */
 final class Levenstein implements AlgorithmInterface
 {
-
     /**
      * @param string $one
      * @param string $two
@@ -17,6 +16,10 @@ final class Levenstein implements AlgorithmInterface
     public function calculate(string $one, string $two): float
     {
         $length = max(mb_strlen($one), mb_strlen($two));
+
+        if (0 === $length) {
+            return 0;
+        }
 
         $value = levenshtein($one, $two);
 

@@ -8,7 +8,7 @@ namespace Olevv\SimilarityStrings\Algorithm;
  */
 final class JaroWinkler implements AlgorithmInterface
 {
-    const SCALING_FACTOR = 0.1;
+    private const SCALING_FACTOR = 0.1;
 
     /**
      * @var
@@ -79,7 +79,7 @@ final class JaroWinkler implements AlgorithmInterface
      * @param string $one
      * @param string $two
      */
-    private function calculateMatching(string $one, string $two)
+    private function calculateMatching(string $one, string $two): void
     {
         foreach (range(0, $this->secondLength - 1) as $i) {
             for ($j = max($i - $this->range, 0),
@@ -100,7 +100,7 @@ final class JaroWinkler implements AlgorithmInterface
      * @param string $one
      * @param string $two
      */
-    private function calculateTranspositions(string $one, string $two)
+    private function calculateTranspositions(string $one, string $two): void
     {
         foreach (range(0, $this->secondLength - 1) as $i) {
             if (!$this->secondLength[$i]) {

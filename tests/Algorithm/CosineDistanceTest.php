@@ -28,6 +28,7 @@ final class CosineDistanceTest extends TestCase
     public function examples()
     {
         return [
+            ['', '', 0],
             ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 1],
             ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.75],
         ];

@@ -24,6 +24,7 @@ final class JaroWinklerTest extends TestCase
     public function examples()
     {
         return [
+            ['', '', 0],
             ['Victory Bible Baptist Church', 'Baptist Victory Bible Church', 0.9357142857142856],
             ['Woodforest Financial Group Incorporated', 'Woodforest Financial Group Inc', 0.95384615384615379],
         ];
