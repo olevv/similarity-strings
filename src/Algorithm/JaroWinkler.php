@@ -79,7 +79,7 @@ final class JaroWinkler implements AlgorithmInterface
      * @param string $one
      * @param string $two
      */
-    private function calculateMatching(string $one, string $two): void
+    private function calculateMatching(string $one, string $two)
     {
         foreach (range(0, $this->secondLength - 1) as $i) {
             for ($j = max($i - $this->range, 0),
@@ -100,7 +100,7 @@ final class JaroWinkler implements AlgorithmInterface
      * @param string $one
      * @param string $two
      */
-    private function calculateTranspositions(string $one, string $two): void
+    private function calculateTranspositions(string $one, string $two)
     {
         foreach (range(0, $this->secondLength - 1) as $i) {
             if (!$this->secondLength[$i]) {
